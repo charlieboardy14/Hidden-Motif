@@ -64,6 +64,9 @@ Return a single JSON object with the keys "theme", "motif1", and "motif2".`;
           }
         });
 
+        if (!response.text) {
+          throw new Error("AI response text is undefined.");
+        }
         const jsonText = response.text.trim();
         return JSON.parse(jsonText);
     });
@@ -95,6 +98,9 @@ Output ONLY the image generation prompt.`;
             temperature: 0.9,
           }
         });
+        if (!response.text) {
+          throw new Error("AI response text is undefined.");
+        }
         return response.text;
     });
   } catch (error) {
@@ -120,6 +126,9 @@ Output ONLY the image generation prompt.`;
             temperature: 0.8,
           }
         });
+        if (!response.text) {
+          throw new Error("AI response text is undefined.");
+        }
         return response.text;
     });
   } catch (error) {
@@ -192,6 +201,9 @@ Artwork Prompts: ${JSON.stringify(artworkPrompts)}
           }
         });
 
+        if (!response.text) {
+          throw new Error("AI response text is undefined.");
+        }
         const jsonText = response.text.trim();
         const parsedResponse = JSON.parse(jsonText);
         

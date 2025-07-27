@@ -273,11 +273,11 @@ interface RevealScreenProps {
 }
 
 const RevealScreen: React.FC<RevealScreenProps> = ({ artworks, votes, players, onNextRound, roundPoints, dodgerId }) => {
-    const me = players.find(p => p.id === socket.id);
-    const myVote = votes.find(v => v.voterId === me?.id);
-    const dodgerPlayer = players.find(p => p.id === dodgerId);
+    const me = players.find((p: Player) => p.id === socket.id);
+    const myVote = votes.find((v: Vote) => v.voterId === me?.id);
+    const dodgerPlayer = players.find((p: Player) => p.id === dodgerId);
     
-    const userCorrectlyIdentifiedDodger = votes.some(v => v.voterId === me?.id && artworks.find(a => a.id === v.artworkId)?.isDodger && v.isYes);
+    const userCorrectlyIdentifiedDodger = votes.some((v: Vote) => v.voterId === me?.id && artworks.find((a: Artwork) => a.id === v.artworkId)?.isDodger && v.isYes);
 
   return (
     <div className="w-full max-w-7xl mx-auto">
@@ -292,9 +292,9 @@ const RevealScreen: React.FC<RevealScreenProps> = ({ artworks, votes, players, o
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {artworks.map(art => {
-          const vote = votes.find(v => v.voterId === me?.id && v.artworkId === art.id);
-          const player = players.find(p => p.id === art.playerId);
+        {artworks.map((art: Artwork) => {
+          const vote = votes.find((v: Vote) => v.voterId === me?.id && v.artworkId === art.id);
+          const player = players.find((p: Player) => p.id === art.playerId);
           return (
             <div key={art.id} className={`relative bg-gray-800 rounded-lg shadow-lg overflow-hidden border-4 ${art.isDodger ? 'border-purple-500' : 'border-gray-700'}`}>
               {art.isDodger && <div className="absolute top-2 right-2 px-3 py-1 bg-purple-600 text-white font-bold rounded-full z-10">DODGER</div>}
@@ -342,13 +342,13 @@ interface GameEndScreenProps {
 }
 
 const GameEndScreen: React.FC<GameEndScreenProps> = ({ players, onPlayAgain }) => {
-  const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
+  const sortedPlayers = [...players].sort((a: Player, b: Player) => b.score - a.score);
 
   return (
     <div className="w-full max-w-md mx-auto p-6 bg-gray-800 rounded-xl shadow-2xl border border-gray-700 text-center">
         <h2 className="text-4xl font-bold mb-6">Final Scores</h2>
         <div className="space-y-3">
-            {sortedPlayers.map((p, index) => (
+            {sortedPlayers.map((p: Player, index: number) => (
                 <div key={p.id} className={`flex justify-between items-center p-3 rounded-lg ${p.id === socket.id ? 'bg-teal-500/30 border-2 border-teal-500' : 'bg-gray-700'}`}>
                     <span className="font-bold text-lg">{index + 1}. {p.id === socket.id ? 'You' : p.name}</span>
                     <span className="font-black text-xl">{p.score} Points</span>
