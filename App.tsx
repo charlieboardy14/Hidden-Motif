@@ -21,7 +21,13 @@ const GameTitle: React.FC = () => (
     </h1>
 );
 
-const JoinScreen: React.FC<{ onJoin: (name: string, roomId: string) => void; onCreate: (name: string) => void; error: string | null }> = ({ onJoin, onCreate, error }) => {
+interface JoinScreenProps {
+  onJoin: (name: string, roomId: string) => void;
+  onCreate: (name: string) => void;
+  error: string | null;
+}
+
+const JoinScreen: React.FC<JoinScreenProps> = ({ onJoin, onCreate, error }) => {
     const [name, setName] = useState('');
     const [roomId, setRoomId] = useState('');
 
@@ -32,7 +38,7 @@ const JoinScreen: React.FC<{ onJoin: (name: string, roomId: string) => void; onC
             <input
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                 placeholder="Enter your name"
                 className="w-full p-3 mb-4 bg-gray-800 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
             />
@@ -53,7 +59,7 @@ const JoinScreen: React.FC<{ onJoin: (name: string, roomId: string) => void; onC
             <input
                 type="text"
                 value={roomId}
-                onChange={(e) => setRoomId(e.target.value.toUpperCase())}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRoomId(e.target.value.toUpperCase())}
                 placeholder="Enter Room Code"
                 maxLength={4}
                 className="w-full p-3 mb-4 bg-gray-800 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -70,8 +76,14 @@ const JoinScreen: React.FC<{ onJoin: (name: string, roomId: string) => void; onC
     );
 };
 
+interface LobbyScreenProps {
+  players: Player[];
+  roomId: string;
+  isHost: boolean;
+  onStart: () => void;
+}
 
-const LobbyScreen: React.FC<{ players: Player[]; roomId: string; isHost: boolean; onStart: () => void }> = ({ players, roomId, isHost, onStart }) => (
+const LobbyScreen: React.FC<LobbyScreenProps> = ({ players, roomId, isHost, onStart }) => (
   <div className="w-full max-w-lg mx-auto p-6 bg-gray-800 rounded-xl shadow-2xl border border-gray-700 text-center">
     <h2 className="text-3xl font-bold text-teal-400 mb-2">Game Lobby</h2>
     <p className="text-gray-400 mb-4">Share this code with your friends:</p>
@@ -95,7 +107,14 @@ const LobbyScreen: React.FC<{ players: Player[]; roomId: string; isHost: boolean
   </div>
 );
 
-const BriefingScreen: React.FC<{ round: number; role: PlayerRole; data: RoundData; onContinue: () => void }> = ({ round, role, data, onContinue }) => (
+interface BriefingScreenProps {
+  round: number;
+  role: PlayerRole;
+  data: RoundData;
+  onContinue: () => void;
+}
+
+const BriefingScreen: React.FC<BriefingScreenProps> = ({ round, role, data, onContinue }) => (
   <div className="w-full max-w-4xl mx-auto p-6 bg-gray-800 rounded-xl shadow-2xl border border-gray-700">
     <h2 className="text-3xl font-bold text-center text-teal-400 mb-2">Round {round} / {TOTAL_ROUNDS}</h2>
     <p className="text-center text-gray-400 mb-6">Your Role:</p>
@@ -138,7 +157,14 @@ const BriefingScreen: React.FC<{ round: number; role: PlayerRole; data: RoundDat
   </div>
 );
 
-const PromptingScreen: React.FC<{ roundData: RoundData; onSubmit: (prompt: string) => void; isDodger: boolean; players: Player[] }> = ({ roundData, onSubmit, isDodger, players }) => {
+interface PromptingScreenProps {
+  roundData: RoundData;
+  onSubmit: (prompt: string) => void;
+  isDodger: boolean;
+  players: Player[];
+}
+
+const PromptingScreen: React.FC<PromptingScreenProps> = ({ roundData, onSubmit, isDodger, players }) => {
   const [prompt, setPrompt] = useState('');
   const [error, setError] = useState('');
   const MAX_CHARS = 100;
@@ -182,7 +208,7 @@ const PromptingScreen: React.FC<{ roundData: RoundData; onSubmit: (prompt: strin
       </div>
       <textarea
         value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setPrompt(e.target.value)}
         placeholder="e.g., An epic fantasy landscape..."
         maxLength={MAX_CHARS}
         rows={3}
@@ -203,7 +229,15 @@ const PromptingScreen: React.FC<{ roundData: RoundData; onSubmit: (prompt: strin
   );
 };
 
-const GalleryScreen: React.FC<{ artwork: Artwork; onVote: (isYes: boolean) => void; time: number; imageIndex: number; totalImages: number }> = ({ artwork, onVote, time, imageIndex, totalImages }) => {
+interface GalleryScreenProps {
+  artwork: Artwork;
+  onVote: (isYes: boolean) => void;
+  time: number;
+  imageIndex: number;
+  totalImages: number;
+}
+
+const GalleryScreen: React.FC<GalleryScreenProps> = ({ artwork, onVote, time, imageIndex, totalImages }) => {
   const timerPercentage = (time / GALLERY_TIMER_SECONDS) * 100;
 
   return (
@@ -228,7 +262,17 @@ const GalleryScreen: React.FC<{ artwork: Artwork; onVote: (isYes: boolean) => vo
   );
 };
 
-const RevealScreen: React.FC<{ artworks: Artwork[]; votes: Vote[]; players: Player[]; onNextRound: () => void; roundPoints: number; dodgerId: string | null; userVoteResult?: { correct: boolean, votedYes: boolean } }> = ({ artworks, votes, players, onNextRound, roundPoints, dodgerId }) => {
+interface RevealScreenProps {
+  artworks: Artwork[];
+  votes: Vote[];
+  players: Player[];
+  onNextRound: () => void;
+  roundPoints: number;
+  dodgerId: string | null;
+  userVoteResult?: { correct: boolean, votedYes: boolean };
+}
+
+const RevealScreen: React.FC<RevealScreenProps> = ({ artworks, votes, players, onNextRound, roundPoints, dodgerId }) => {
     const me = players.find(p => p.id === socket.id);
     const myVote = votes.find(v => v.voterId === me?.id);
     const dodgerPlayer = players.find(p => p.id === dodgerId);
@@ -292,7 +336,12 @@ const RevealScreen: React.FC<{ artworks: Artwork[]; votes: Vote[]; players: Play
   );
 };
 
-const GameEndScreen: React.FC<{ players: Player[]; onPlayAgain: () => void }> = ({ players, onPlayAgain }) => {
+interface GameEndScreenProps {
+  players: Player[];
+  onPlayAgain: () => void;
+}
+
+const GameEndScreen: React.FC<GameEndScreenProps> = ({ players, onPlayAgain }) => {
   const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
 
   return (
@@ -341,7 +390,7 @@ export default function App() {
     };
   }, []);
   
-  const me = game?.players.find(p => p.id === socket?.id);
+  const me = game?.players.find(p => p.id === socket.id);
 
   const handleCreateGame = (name: string) => {
     socket.emit('createGame', { name }, (newRoomId: string) => {
