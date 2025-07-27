@@ -1,6 +1,5 @@
 import * as aiplatform from '@google-cloud/aiplatform';
 import type { Artwork, RoundData } from '../../types.cjs';
-import type { Artwork, RoundData } from '../../types.cjs';
 
 // Vertex AI client does not directly use API_KEY in constructor for ADC
 // Ensure gcloud auth application-default login has been run or service account is configured
