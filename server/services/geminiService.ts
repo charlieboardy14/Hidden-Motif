@@ -141,7 +141,7 @@ export const generateImage = async (prompt: string): Promise<string | null> => {
   try {
     return await withRetry(async () => {
         const response = await ai.models.generateImages({
-          model: 'imagen-3.0-generate-002',
+          model: 'gemini-2.0-flash',
           prompt: prompt,
           config: {
             numberOfImages: 1,
