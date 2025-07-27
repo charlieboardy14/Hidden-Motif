@@ -143,12 +143,12 @@ export const generateImage = async (prompt: string): Promise<string | null> => {
         const response = await ai.models.generateContent({
           model: 'gemini-2.0-flash-exp',
           contents: [{ role: 'user', parts: [{ text: prompt }] }],
-          generationConfig: {
+          config: { // Changed from generationConfig to config
             responseMimeType: 'image/png',
           },
         });
         
-        const imagePart = response.candidates[0].content.parts[0];
+        const imagePart = response.candidates?.[0]?.content?.parts?.[0]; // Added optional chaining
         if (imagePart && imagePart.inlineData) {
           return imagePart.inlineData.data;
         }
