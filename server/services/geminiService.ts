@@ -1,5 +1,5 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import type { Artwork, RoundData } from '../../types';
+import type { Artwork, RoundData } from '../../types.cjs';
 
 if (!process.env.API_KEY) {
   throw new Error("API_KEY environment variable not set");
