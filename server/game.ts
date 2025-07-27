@@ -1,6 +1,6 @@
-import { GameState, Player, Artwork, Vote, RoundData, ServerGameState } from '../types';
-import { TOTAL_ROUNDS, TOTAL_PLAYERS, GALLERY_TIMER_SECONDS } from '../constants';
-import * as gemini from './services/geminiService';
+import { GameState, Player, Artwork, Vote, RoundData, ServerGameState } from '../types.js';
+import { TOTAL_ROUNDS, TOTAL_PLAYERS, GALLERY_TIMER_SECONDS } from '../constants.js';
+import * as gemini from './services/geminiService.js';
 
 const shuffleArray = <T,>(array: T[]): T[] => {
   return [...array].sort(() => Math.random() - 0.5);
