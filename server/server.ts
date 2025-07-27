@@ -2,7 +2,7 @@ import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
-import { Game } from './game';
+import { Game } from './game.cjs';
 
 const app = express();
 app.use(cors()); // Allow requests from the frontend URL
