@@ -140,7 +140,8 @@ Output ONLY the image generation prompt.`;
 export const generateImage = async (prompt: string): Promise<string | null> => {
   try {
     return await withRetry(async () => {
-        const response = await generativeModel.generateContent({
+        const response = await ai.models.generateContent({
+          model: 'gemini-2.0-flash-exp',
           contents: [{ role: 'user', parts: [{ text: prompt }] }],
           generationConfig: {
             responseMimeType: 'image/png',
