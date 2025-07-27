@@ -1,4 +1,4 @@
-import VertexAI from '@google-cloud/aiplatform';
+import * as aiplatform from '@google-cloud/aiplatform';
 import type { Artwork, RoundData } from '../../types';
 
 // Vertex AI client does not directly use API_KEY in constructor for ADC
@@ -6,7 +6,7 @@ import type { Artwork, RoundData } from '../../types';
 const project = process.env.GCP_PROJECT_ID || 'your-gcp-project-id'; // Replace with your GCP Project ID
 const location = 'us-central1';
 
-const vertexAI = new VertexAI.VertexAI({ project, location });
+const vertexAI = new aiplatform.VertexAI({ project, location });
 const generativeModel = vertexAI.getGenerativeModel({ model: 'gemini-2.0-flash-001' });
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
