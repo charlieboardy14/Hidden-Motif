@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build",
-    "build:server": "tsc -p tsconfig.server.json && chmod +x dist-server/server/server.js",
+    "build:server": "bash ./build-server.sh",
     "preview": "vite preview"
   },
   "dependencies": {
