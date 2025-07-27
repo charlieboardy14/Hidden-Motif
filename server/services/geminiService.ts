@@ -148,7 +148,7 @@ export const generateImage = async (prompt: string): Promise<string | null> => {
           },
         });
         
-        const imagePart = response.response.candidates[0].content.parts[0];
+        const imagePart = response.candidates[0].content.parts[0];
         if (imagePart && imagePart.inlineData) {
           return imagePart.inlineData.data;
         }
