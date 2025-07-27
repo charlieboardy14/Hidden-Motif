@@ -1,4 +1,5 @@
-import { VertexAI } from '@google-cloud/aiplatform';
+const aiplatform = require('@google-cloud/aiplatform');
+const { VertexAI } = aiplatform;
 import type { Artwork, RoundData } from '../../types.cjs';
 
 const project = process.env.GCP_PROJECT_ID || 'your-gcp-project-id';
