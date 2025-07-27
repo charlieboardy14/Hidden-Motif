@@ -1,4 +1,4 @@
-import { VertexAI } from '@google-cloud/aiplatform';
+import VertexAI from '@google-cloud/aiplatform';
 import type { Artwork, RoundData } from '../../types';
 
 // Vertex AI client does not directly use API_KEY in constructor for ADC
