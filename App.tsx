@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GameState, Player, Artwork, Vote, RoundData, PlayerRole, ServerGameState } from './types';
 import { TOTAL_ROUNDS, TOTAL_PLAYERS, GALLERY_TIMER_SECONDS } from './constants';
 import { socket, connect, disconnect } from './services/socketService';
@@ -274,7 +274,6 @@ interface RevealScreenProps {
 
 const RevealScreen: React.FC<RevealScreenProps> = ({ artworks, votes, players, onNextRound, roundPoints, dodgerId }) => {
     const me = players.find((p: Player) => p.id === socket.id);
-    const myVote = votes.find((v: Vote) => v.voterId === me?.id);
     const dodgerPlayer = players.find((p: Player) => p.id === dodgerId);
     
     const userCorrectlyIdentifiedDodger = votes.some((v: Vote) => v.voterId === me?.id && artworks.find((a: Artwork) => a.id === v.artworkId)?.isDodger && v.isYes);

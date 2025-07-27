@@ -1,4 +1,4 @@
-import { GameState, Player, Artwork, Vote, RoundData, ServerGameState, PlayerRole } from '../types';
+import { GameState, Player, Artwork, Vote, RoundData, ServerGameState } from '../types';
 import { TOTAL_ROUNDS, TOTAL_PLAYERS, GALLERY_TIMER_SECONDS } from '../constants';
 import * as gemini from './services/geminiService';
 

@@ -150,7 +150,7 @@ export const generateImage = async (prompt: string): Promise<string | null> => {
           },
         });
         
-        if (response.generatedImages && response.generatedImages.length > 0) {
+        if (response.generatedImages && response.generatedImages.length > 0 && response.generatedImages[0].image.imageBytes) {
           return response.generatedImages[0].image.imageBytes;
         }
         return null;
