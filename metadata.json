@@ -1,0 +1,5 @@
+{
+  "name": "Hidden Motif",
+  "description": "An AI art observation game where players must either hide or avoid secret motifs in their artwork, then guess the deceiver.",
+  "requestFramePermissions": []
+}
