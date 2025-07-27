@@ -150,8 +150,11 @@ export const generateImage = async (prompt: string): Promise<string | null> => {
           },
         });
         
-        if (response.generatedImages && response.generatedImages.length > 0 && response.generatedImages[0].image.imageBytes) {
-          return response.generatedImages[0].image.imageBytes;
+        if (response.generatedImages && response.generatedImages.length > 0) {
+          const firstImage = response.generatedImages[0];
+          if (firstImage.image && firstImage.image.imageBytes) {
+            return firstImage.image.imageBytes;
+          }
         }
         return null;
     });
