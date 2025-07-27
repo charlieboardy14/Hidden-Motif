@@ -1,4 +1,4 @@
 set -x
 tsc -p tsconfig.server.json
-mv dist-server/server/server.js dist-server/server/server.cjs
+find dist-server -name "*.js" -exec sh -c 'mv "$0" "${0%.js}.cjs"' {} \;
 chmod +x dist-server/server/server.cjs
